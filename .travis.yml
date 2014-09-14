@@ -1,5 +1,4 @@
 language: java
-install: mvn install
 addons:
   artifacts:
     key:
