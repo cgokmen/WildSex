@@ -11,7 +11,7 @@ import org.bukkit.craftbukkit.v1_7_R3.entity.*;
 import net.minecraft.server.v1_7_R3.EntityHuman;
 
 import org.bukkit.World;
-import org.bukkit.entity.Cow;
+import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,56 +33,45 @@ public class WildSexTask extends BukkitRunnable {
 	}
 	
 	public void run() {
-		//plugin.getServer().broadcastMessage("Starting Wild Sex Sequence!");
-		
 		List<World> worlds = plugin.getServer().getWorlds();
 		Iterator<World> worldIterator = worlds.iterator();
 		
-		//int cowsBred = 0;
-		
 		while(worldIterator.hasNext()) {
 			World world = worldIterator.next();
-			//plugin.getServer().broadcastMessage("Starting world " + world.getName() + ".");
-			Collection<Cow> cows = world.getEntitiesByClass(Cow.class);
+			Collection<Animals> animals = world.getEntitiesByClass(Animals.class);
 
-			Iterator<Cow> cowIterator = cows.iterator();
-			while(cowIterator.hasNext()) {
-				Cow cow = (Cow) cowIterator.next();
-				//plugin.getServer().broadcastMessage("Starting cow.");
-				EntityAnimal entity = (EntityAnimal) ((CraftEntity)((CraftAnimals)cow)).getHandle();
+			Iterator<Animals> animalIterator = animals.iterator();
+			while(animalIterator.hasNext()) {
+				Animals animal = (Animals) animalIterator.next();
+				EntityAnimal entity = (EntityAnimal) ((CraftEntity)((CraftAnimals)animal)).getHandle();
 				
-				if (cow.isAdult() && cow.canBreed() && !entity.ce()) {
+				if (animal.isAdult() && animal.canBreed() && !entity.ce()) {
 					if (Math.random() <= this.chance) {
 						if (this.mateMode) {
-							List<Entity> others = cow.getNearbyEntities(MATING_DISTANCE / 2, MATING_DISTANCE / 2, MATING_DISTANCE / 2);
-							List<Cow> eligibleCows = new ArrayList<Cow>();
+							List<Entity> others = animal.getNearbyEntities(MATING_DISTANCE / 2, MATING_DISTANCE / 2, MATING_DISTANCE / 2);
+							List<Animals> eligibleMates = new ArrayList<Animals>();
 							
 							Iterator<Entity> othersIterator = others.iterator();
 							while (othersIterator.hasNext()) {
-								Entity other = othersIterator.next();
+								Entity mate = othersIterator.next();
 								
-								if (other.getType() == EntityType.COW) {
-									Cow otherCow = (Cow) other;
-									EntityAnimal otherCowEntity = (EntityAnimal) ((CraftEntity)((CraftAnimals)otherCow)).getHandle();
+								if (mate instanceof Animals) {
+									Animals mateAnimal = (Animals) mate;
+									EntityAnimal mateAnimalEntity = (EntityAnimal) ((CraftEntity)((CraftAnimals)mateAnimal)).getHandle();
 									
-									if (otherCow.isAdult() && otherCow.canBreed() && !otherCowEntity.ce()) {
-										eligibleCows.add(otherCow);
+									if (mateAnimal.isAdult() && mateAnimal.canBreed() && !mateAnimalEntity.ce()) {
+										eligibleMates.add(mateAnimal);
 									}
 								}
 							}
 							
-							//plugin.getServer().broadcastMessage("Found " + eligibleCows.size() + " eligible cows.");
-							
-							if (!eligibleCows.isEmpty()) {
-								Cow mateCow = eligibleCows.get(randomizer.nextInt(eligibleCows.size()));
-								EntityAnimal mateCowEntity = (EntityAnimal) ((CraftEntity)((CraftAnimals)mateCow)).getHandle();
+							if (!eligibleMates.isEmpty()) {
+								Animals mateAnimal = eligibleMates.get(randomizer.nextInt(eligibleMates.size()));
+								EntityAnimal mateAnimalEntity = (EntityAnimal) ((CraftEntity)((CraftAnimals)mateAnimal)).getHandle();
 								
 								EntityHuman feeder = null;
 								entity.f(feeder);
-								mateCowEntity.f(feeder);
-								
-								//cowsBred++;
-								//plugin.getServer().broadcastMessage("A new cow couple has been created!");
+								mateAnimalEntity.f(feeder);
 							}
 						} else {
 							EntityHuman feeder = null;
@@ -92,7 +81,5 @@ public class WildSexTask extends BukkitRunnable {
 				}
 			}
 		}
-		
-		//plugin.getServer().broadcastMessage("Wild Sex ended: " + cowsBred + " cows were mated.");
 	}
 }
