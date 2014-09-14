@@ -72,11 +72,15 @@ public class WildSexTask extends BukkitRunnable {
 
                                 EntityHuman feeder = null;
                                 entity.f(feeder);
+                                theTaskListener.addTrack(animal);
+                                
                                 mateAnimalEntity.f(feeder);
+                                theTaskListener.addTrack(mateAnimal);
                             }
                         } else {
                             EntityHuman feeder = null;
                             entity.f(feeder);
+                            theTaskListener.addTrack(animal);
                         }
                     }
                 }
