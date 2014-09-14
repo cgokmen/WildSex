@@ -5,15 +5,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.server.v1_7_R3.EntityAnimal;
-import org.bukkit.craftbukkit.v1_7_R3.entity.*;
 import net.minecraft.server.v1_7_R3.EntityHuman;
-
 import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_7_R3.entity.*;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
