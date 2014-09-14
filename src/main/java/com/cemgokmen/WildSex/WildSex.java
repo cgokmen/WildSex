@@ -1,8 +1,10 @@
 package com.cemgokmen.WildSex;
 
+import java.util.logging.Level;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class WildSex extends JavaPlugin {
@@ -11,6 +13,7 @@ public class WildSex extends JavaPlugin {
 	private int interval;
 	private boolean mateMode;
 	private double chance;
+        private WildSexTaskListener listener;
 	
 	@Override
 	public void onEnable() {
@@ -20,18 +23,21 @@ public class WildSex extends JavaPlugin {
 		this.interval = this.getConfig().getInt("interval") * 20 * 60;
 		this.mateMode = this.getConfig().getBoolean("matemode");
 		this.chance = this.getConfig().getDouble("chance");
-		
-		this.wildSexTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new WildSexTask(this, this.chance, this.mateMode), 0L, this.interval);
+		this.listener = new WildSexTaskListener();
+                getServer().getPluginManager().registerEvents(new WildSexTaskListener(), this);
+                
+		this.wildSexTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new WildSexTask(this, this.chance, this.mateMode, this.listener), 0L, this.interval);
 		this.startTime = System.currentTimeMillis();
-		getLogger().info("WildSex v" + this.getDescription().getVersion() + " by Funstein successfully activated!");
+		getLogger().log(Level.INFO, "WildSex v{0} by Funstein successfully activated!", this.getDescription().getVersion());
 		String mateModeString = (this.mateMode) ? "active" : "inactive";
-		getLogger().info("Mate mode: " + mateModeString + ", interval: " + (interval / 1200) + " minutes, chance: " + String.format("%.2f", this.chance) + ".");
+		getLogger().log(Level.INFO, "Mate mode: {0}, interval: {1} minutes, chance: {2}.", new Object[]{mateModeString, this.interval / 1200, String.format("%.2f", this.chance)});
 	}
 	
 	@Override
 	public void onDisable() {
-		this.getServer().getScheduler().cancelTask(wildSexTask);
-		getLogger().info("WildSex v" + this.getDescription().getVersion() + " by Funstein successfully deactivated!");
+		this.getServer().getScheduler().cancelTask(this.wildSexTask);
+                HandlerList.unregisterAll(this);
+		getLogger().log(Level.INFO, "WildSex v{0} by Funstein successfully deactivated!", this.getDescription().getVersion());
 	}
 	
 	@Override
