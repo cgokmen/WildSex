@@ -23,8 +23,8 @@ public class WildSex extends JavaPlugin {
 		this.interval = this.getConfig().getInt("interval") * 20 * 60;
 		this.mateMode = this.getConfig().getBoolean("matemode");
 		this.chance = this.getConfig().getDouble("chance");
-		this.listener = new WildSexTaskListener();
-                getServer().getPluginManager().registerEvents(new WildSexTaskListener(), this);
+		this.listener = new WildSexTaskListener(this);
+                getServer().getPluginManager().registerEvents(this.listener, this);
                 
 		this.wildSexTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new WildSexTask(this, this.chance, this.mateMode, this.listener), 0L, this.interval);
 		this.startTime = System.currentTimeMillis();
