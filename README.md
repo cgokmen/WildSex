@@ -1,4 +1,6 @@
-![Project Logo](https://raw.githubusercontent.com/sultanskyman/WildSex/master/wildsex.png "WildSex - Even your sheep need some fun!")
+<p align="center">
+  <img src="https://raw.githubusercontent.com/sultanskyman/WildSex/master/wildsex.png" alt="Project Logo" title="WildSex - Even your sheep need some fun!"/>
+</p>
 
 WildSex
 =======
