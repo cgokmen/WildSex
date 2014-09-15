@@ -1,6 +1,6 @@
 name: WildSex
 main: com.cemgokmen.WildSex.WildSex
-version: 1.2
+version: 1.3
 commands:
    wildsex:
       description: Returns the number of seconds left until the next time the cows breed.
