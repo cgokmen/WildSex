@@ -1,3 +1,5 @@
+![Project Logo](https://raw.githubusercontent.com/sultanskyman/WildSex/master/wildsex.png "WildSex - Even your sheep need some fun!")
+
 WildSex
 =======
 
@@ -21,3 +23,9 @@ To do
 * Implement class existence check so that wrong versions can't run the plugin at all.
 * Produce copies for CB-1.7.10-R0.1 as well as Spigot
 * Implement XP drop removal
+
+License
+----------
+Protected under the MIT License.
+
+Feel free to download, edit and redistribute, but do not forget to give proper credit.
