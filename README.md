@@ -13,8 +13,8 @@ The config.yml file supports the following settings:
 
 Known Bugs
 ----------
-Does not support CraftBukkit / Spigot versions apart from CB-1.7.9-R0.2
-Mate mode when activated matches two different species together!
+* Does not support CraftBukkit / Spigot versions apart from CB-1.7.9-R0.2
+* Mate mode when activated matches two different species together!
 
 To do
 ----------
