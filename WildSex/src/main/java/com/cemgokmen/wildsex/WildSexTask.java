@@ -54,7 +54,7 @@ public class WildSexTask extends BukkitRunnable {
                             while (othersIterator.hasNext()) {
                                 Entity mate = othersIterator.next();
 
-                                if (mate instanceof Animals) {
+                                if (mate.getClass() == animal.getClass()) {
                                     Animals mateAnimal = (Animals) mate;
 
                                     if (mateAnimal.isAdult() && mateAnimal.canBreed() && !wildAnimalHandler.isInLoveMode(mateAnimal)) {

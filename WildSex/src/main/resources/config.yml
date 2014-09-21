@@ -6,7 +6,7 @@ matemode: false
 # interval - how many minutes between each iteration of the
 # random breeding? Do not put anything below 1.
 # default: 10
-interval: 5
+interval: 10
 
 # chance - 1 in how many cows should be set into breeding mode?
 # 1 will mean every cow, 0 will mean none.
