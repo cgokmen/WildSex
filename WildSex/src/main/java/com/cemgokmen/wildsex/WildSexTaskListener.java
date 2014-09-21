@@ -1,7 +1,8 @@
-package com.cemgokmen.WildSex;
+package com.cemgokmen.wildsex;
 
 import java.util.Iterator;
 import java.util.List;
+
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -32,7 +33,7 @@ public class WildSexTaskListener implements Listener {
                 List<Entity> nearbyEntities = animal.getNearbyEntities(2, 2, 2);
                 Iterator<Entity> nearbyEntityIterator = nearbyEntities.iterator();
 
-                while(nearbyEntityIterator.hasNext()) {
+                while (nearbyEntityIterator.hasNext()) {
                     if (DEBUG_MODE) plugin.getServer().broadcastMessage("There was stuff near it!");
                     Entity nextEntity = nearbyEntityIterator.next();
                     if (nextEntity.getType().equals(EntityType.EXPERIENCE_ORB)) {

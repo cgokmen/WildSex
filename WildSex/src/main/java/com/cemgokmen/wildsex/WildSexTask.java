@@ -1,11 +1,13 @@
 package com.cemgokmen.wildsex;
 
 import com.cemgokmen.wildsex.api.WildAnimal;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import org.bukkit.World;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
@@ -27,7 +29,6 @@ public class WildSexTask extends BukkitRunnable {
         this.randomizer = new Random();
         this.chance = chance;
         this.mateMode = mateMode;
-        this.theTaskListener = listener;
         this.wildAnimalHandler = wildAnimalHandler;
     }
 
