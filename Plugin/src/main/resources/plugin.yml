@@ -1,9 +1,8 @@
-name: AbstractionExamplePlugin
-main: org.kitteh.example.plugin.MyPlugin
-author: mbaxter
-description: Example Abstraction Plugin
+name: WildSex
+main: com.cemgokmen.wildsex.WildSex
+author: sultanskyman
 version: '${project.version}'
 commands:
-  example:
-    description: Example command
-    usage: /example message here
+   wildsex:
+      description: Returns the number of seconds left until the next time animals are randomly bred.
+      usage: /<command>

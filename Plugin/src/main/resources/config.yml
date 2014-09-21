@@ -1,0 +1,14 @@
+# matemode - should animals be put into love mode randomly
+# or should it be done with a mate (as a couple)?
+# default: false
+matemode: false
+
+# interval - how many minutes between each iteration of the
+# random breeding? Do not put anything below 1.
+# default: 10
+interval: 5
+
+# chance - 1 in how many cows should be set into breeding mode?
+# 1 will mean every cow, 0 will mean none.
+# default: 0.1
+chance: 0.1
