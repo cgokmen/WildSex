@@ -8,7 +8,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.Metrics;
 import com.cemgokmen.wildsex.api.WildAnimal;
 
 public class WildSex extends JavaPlugin {
@@ -60,7 +59,7 @@ public class WildSex extends JavaPlugin {
         getLogger().log(Level.INFO, "Mate mode: {0}, interval: {1} minutes, chance: {2}.", new Object[]{mateModeString, this.interval / 1200, String.format("%.2f", this.chance)});
 
         try {
-            Metrics metrics = new Metrics(this);
+            MetricsLite metrics = new MetricsLite(this);
             metrics.start();
             getLogger().log(Level.INFO, "WildSex connected to mcstats.org successfully!");
         } catch (IOException e) {
