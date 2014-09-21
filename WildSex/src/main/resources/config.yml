@@ -12,3 +12,9 @@ interval: 5
 # 1 will mean every cow, 0 will mean none.
 # default: 0.1
 chance: 0.1
+
+# auto-update - true will automatically update the plugin when a
+# new version comes out - recommended since backward compatibility
+# will always be maintained.
+# default: true
+auto-update: true;

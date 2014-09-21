@@ -19,6 +19,7 @@ public class WildSex extends JavaPlugin {
     private int interval;
     private boolean mateMode;
     private double chance;
+    private boolean autoUpdate;
     private WildSexTaskListener listener;
 
     @Override
@@ -47,6 +48,11 @@ public class WildSex extends JavaPlugin {
         this.interval = this.getConfig().getInt("interval") * 20 * 60;
         this.mateMode = this.getConfig().getBoolean("matemode");
         this.chance = this.getConfig().getDouble("chance");
+        this.autoUpdate = this.getConfig().getBoolean("auto-update");
+
+        if (this.autoUpdate) {
+            Updater updater = new Updater(this, 85038, this.getFile(), Updater.UpdateType.DEFAULT, false);
+        }
 
         this.listener = new WildSexTaskListener(this);
         getServer().getPluginManager().registerEvents(this.listener, this);
