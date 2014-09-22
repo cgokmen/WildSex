@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/sultanskyman/WildSex/master/wildsex.png" alt="Project Logo" title="WildSex - Even your sheep need some fun!"/>
 </p>
 
-WildSex 2.0
+WildSex 2.1
 =======
 
 A Bukkit plugin that randomly puts wild animals in love mode, creating natural population increase.
