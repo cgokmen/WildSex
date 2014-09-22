@@ -17,4 +17,4 @@ chance: 0.1
 # new version comes out - recommended since backward compatibility
 # will always be maintained.
 # default: true
-auto-update: true;
+auto-update: true
