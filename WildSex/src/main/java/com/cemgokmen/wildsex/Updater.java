@@ -13,6 +13,7 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.zip.ZipEntry;
@@ -597,7 +598,27 @@ public class Updater {
      * @return true if Updater should consider the remote version an update, false if not.
      */
     public boolean shouldUpdate(String localVersion, String remoteVersion) {
-        return !localVersion.equalsIgnoreCase(remoteVersion);
+        try {
+            int digitLength = localVersion.length() > remoteVersion.length() ? localVersion.length() : remoteVersion.length();
+            String[] localVersionArray = Arrays.copyOf(localVersion.split("\\."), digitLength);
+            String[] remoteVersionArray = Arrays.copyOf(remoteVersion.split("\\."), digitLength);
+            for (int i = 0; i < digitLength; i++) {
+                if (parseInt(localVersionArray[i]) < parseInt(remoteVersionArray[i])) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            return !localVersion.equalsIgnoreCase(remoteVersion);
+        }
+    }
+
+    private int parseInt(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     /**
