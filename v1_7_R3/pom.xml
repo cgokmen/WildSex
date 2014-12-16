@@ -17,9 +17,9 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>craftbukkit</artifactId>
-      <version>1.7.9-R0.2</version>
-      <type>jar</type>
-      <optional>true</optional>
+      <version>1.7.9-R0.2-SNAPSHOT</version>
+      <systemPath>${project.basedir}/lib/craftbukkit-1.7.9-R0.2-SNAPSHOT.jar</systemPath>
+      <scope>system</scope>
     </dependency>
     <dependency>
       <groupId>com.cemgokmen</groupId>
