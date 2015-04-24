@@ -20,15 +20,27 @@
     <module>v1_7_R3</module>
     <module>v1_7_R4</module>
     <module>v1_8_R1</module>
+    <module>v1_8_R2</module>
     <module>WildSex</module>
   </modules>
 
   <!-- Define the repo here since multiple modules will be using it -->
   <repositories>
         <repository>
-            <id>bukkit-repo</id>
+            <id>Another-Spigot-repo</id>
+            <url>http://maven.elmakers.com/repository/</url>
+        </repository>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+			   <id>md_5-repo</id>
+			   <url>http://repo.md-5.net/content/groups/public/</url>
+		</repository>
+        <repository>
+            <id>WorldGuard-repo</id>
             <url>http://maven.sk89q.com/artifactory/repo/</url>
-            <!--<url>http://repo.bukkit.org/content/groups/public/</url>-->
         </repository>
   </repositories>
 

@@ -15,13 +15,11 @@ public class WildAnimalHandler implements WildAnimal {
         return entity;
     }
 
-    @Override
     public boolean isInLoveMode(Animals animal) {
         EntityAnimal entity = getEntityAnimal(animal);
         return entity.ce();
     }
 
-    @Override
     public void startLoveMode(Animals animal) {
         EntityAnimal entity = getEntityAnimal(animal);
         EntityHuman human = null;
@@ -29,7 +27,6 @@ public class WildAnimalHandler implements WildAnimal {
         entity.f(human);
     }
 
-    @Override
     public void endLoveMode(Animals animal) {
         EntityAnimal entity = getEntityAnimal(animal);
         entity.cf();

@@ -16,11 +16,17 @@
   <dependencies>
     <dependency>
       <groupId>org.bukkit</groupId>
-      <artifactId>craftbukkit</artifactId>
+      <artifactId>bukkit</artifactId>
       <version>1.8-R0.1-SNAPSHOT</version>
-      <systemPath>${project.basedir}/lib/craftbukkit-1.8-R0.1-SNAPSHOT.jar</systemPath>
-      <scope>system</scope>
-      <optional>true</optional>
+      <type>jar</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.spigotmc</groupId>
+      <artifactId>spigot</artifactId>
+      <version>1.8-R0.1-SNAPSHOT</version>
+      <type>jar</type>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.cemgokmen</groupId>
