@@ -43,6 +43,14 @@
         </dependency>
         <dependency>
             <groupId>com.cemgokmen</groupId>
+            <artifactId>wildsex-v1_8_R2</artifactId>
+            <version>v1_8_R2</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.cemgokmen</groupId>
             <artifactId>wildsex-api</artifactId>
             <version>API</version>
             <type>jar</type>
