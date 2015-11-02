@@ -95,13 +95,6 @@ public class WildSex extends JavaPlugin {
         String mateModeString = (this.mateMode) ? "active" : "inactive";
         getLogger().log(Level.INFO, "Mate mode: {0}, interval: {1} minutes, chance: {2}.", new Object[]{mateModeString, this.interval / 1200, String.format("%.2f", this.chance)});
 
-        try {
-            MetricsLite metrics = new MetricsLite(this);
-            metrics.start();
-            getLogger().log(Level.INFO, "WildSex connected to mcstats.org successfully!");
-        } catch (IOException e) {
-            getLogger().log(Level.INFO, "WildSex could not connect to mcstats.org.");
-        }
     }
 
     @Override
