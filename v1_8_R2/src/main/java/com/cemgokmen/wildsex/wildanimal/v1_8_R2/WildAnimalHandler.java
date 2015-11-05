@@ -18,18 +18,18 @@ private EntityAnimal getEntityAnimal(Animals animal) {
 @Override
 public boolean isInLoveMode(Animals animal) {
     EntityAnimal entity = getEntityAnimal(animal);
-    return entity.ce();
+    return entity.isInLove();
 }
 
 public void startLoveMode(Animals animal) {
     EntityAnimal entity = getEntityAnimal(animal);
     EntityHuman human = null;
 
-    entity.f();
+    entity.c(human);
 }
 
 public void endLoveMode(Animals animal) {
     EntityAnimal entity = getEntityAnimal(animal);
-    entity.cf();
+    entity.cs();
 }
 }
