@@ -39,7 +39,6 @@ Special thanks to
 ----------
 * [Gravity](https://github.com/gravitylow), for [Updater](https://github.com/gravitylow/Updater),
 * [mbaxter](https://github.com/mbax), for his [Multiple Versions Tutorial](https://forums.bukkit.org/threads/support-multiple-minecraft-versions-with-abstraction-maven.115810/) and [AbstractionExamplePlugin](https://github.com/mbax/AbstractionExamplePlugin) - these solved the problem I was trying to figure out at [Stack Overflow](http://stackoverflow.com/questions/25947376/dynamic-typecasting-in-java),
-* [Hidendra](https://github.com/Hidendra), for [Metrics](https://github.com/Hidendra/Plugin-Metrics).
 
 Source
 ----------

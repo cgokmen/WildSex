@@ -10,11 +10,6 @@
 
     <repositories>
         <repository>
-            <id>WorldGuard-repo</id>
-            <url>http://maven.sk89q.com/artifactory/repo/</url>
-            <!--<url>http://repo.bukkit.org/content/groups/public/</url>-->
-        </repository>
-        <repository>
             <id>Another-Spigot-repo</id>
             <url>http://maven.elmakers.com/repository/</url>
         </repository>
@@ -92,7 +87,7 @@
             <type>jar</type>
             <scope>provided</scope>
             <optional>true</optional>
-        </dependency>-->   
+        </dependency>-->
     </dependencies>
 
     <build>

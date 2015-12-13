@@ -37,14 +37,6 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
-        <repository>
-			   <id>md_5-repo</id>
-			   <url>http://repo.md-5.net/content/groups/public/</url>
-		</repository>
-        <repository>
-            <id>WorldGuard-repo</id>
-            <url>http://maven.sk89q.com/artifactory/repo/</url>
-        </repository>
   </repositories>
 
 </project>
