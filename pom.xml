@@ -33,10 +33,6 @@
             <id>Another-Spigot-repo</id>
             <url>http://maven.elmakers.com/repository/</url>
         </repository>
-        <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
-        </repository>
   </repositories>
 
 </project>

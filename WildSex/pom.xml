@@ -9,10 +9,10 @@
     <!-- This is where I track the version -->
 
     <repositories>
-        <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
-        </repository>
+          <repository>
+              <id>Another-Spigot-repo</id>
+              <url>http://maven.elmakers.com/repository/</url>
+          </repository>
     </repositories>
 
     <dependencies>
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.7.9-R0.2-SNAPSHOT</version>
+            <version>1.7.9-R0.2</version>
             <type>jar</type>
             <scope>provided</scope>
             <optional>true</optional>
