@@ -1,8 +1,14 @@
 language: java
-addons:
-  artifacts:
-    key:
-      secure: MfScDVKNlZ8xn3LEweRXXR93bDe3z512BQvqlPrLuwwkOGbE5TX+8gjfE8d7aPSYHaF3mIb5wvOjGMXSU9SkrrfkzwJqOiyxs5FhB01ChUkizoy9zcJgZrEF7y07MfgjFd5Nz0pDQETpyGiIHUNr5WmnJsYiY056B9vesAqZJLQ=
-    secret:
-      secure: aDhzv6o6zF0ZoNBOskUeHzeKidDuanFrn9IT1uNHbPokpn5mfq3PJOCYdrgLMeDNW4HZSrbWDQfL0n1R0lQN5vpqGWA97tWiI0HrToi4+gS0TkUBBtk7Dx2hAiWXTU6XMkvimGLS8etMekj3s5VWQxAADWFkVPSurxkQRYlqqzI=
-    bucket: Sultanskyman
+jdk:
+- openjdk8
+
+sudo: false
+install: true
+
+deploy:
+  provider: releases
+  api_key:
+  file: target/WildSex.jar
+  skip_cleanup: true
+  on:
+    tags: true
