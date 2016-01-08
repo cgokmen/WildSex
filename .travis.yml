@@ -6,5 +6,5 @@ deploy:
     secure: aMJRj29EMLocCiy7gmBnYxI/A1vR8Tu1q9PzzVdgcZJXSzSFHFDmhgDzOqgGIpEmlAMMLHPEFZGnwen8NLeMM6eyRqbDqavmWddVSz0L5hf8YXsAAWEpjjfIspTWTxGtM7xIAaBZ9uFKCLpSn9kXP4W2OB67L4Hr7V8wN4+/ET0=
   file: target/WildSex.jar
   on:
-    tag: true
+    tags: true
     repo: sultanskyman/WildSex
