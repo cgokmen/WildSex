@@ -85,9 +85,11 @@ public class WildSexTask extends BukkitRunnable {
         }
 
         // I'm really not sure about this formula.
-        double targetPopulationForCheckRadius = plugin.getMaxAnimalsPerBlock() * Math.pow(plugin.getMaxAnimalsCheckRadius(), 3);
+        double targetPopulationForCheckRadius = plugin.getMaxAnimalsPerBlock() * Math.pow(plugin.getMaxAnimalsCheckRadius(), 2); // Check for the square area, but apply it to the cube.
         double currentPopulationRatio = count / targetPopulationForCheckRadius;
         double probability = 1 - currentPopulationRatio;
+
+        //plugin.getServer().broadcastMessage("Found " + count + " animals, so the probability is " + String.format("%%%.2f", probability * 100) + ".");
 
         return (probability > 0) ? probability : 0.0;
     }
