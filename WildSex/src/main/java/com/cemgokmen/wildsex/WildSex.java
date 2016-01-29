@@ -19,6 +19,8 @@ public class WildSex extends JavaPlugin {
     private int interval;
     private boolean mateMode;
     private double chance;
+    private double maxAnimalsPerBlock;
+    private double maxAnimalsCheckRadius;
     private boolean autoUpdate;
     private WildSexTaskListener listener;
 
@@ -48,6 +50,8 @@ public class WildSex extends JavaPlugin {
         this.interval = this.getConfig().getInt("interval") * 20 * 60;
         this.mateMode = this.getConfig().getBoolean("matemode");
         this.chance = this.getConfig().getDouble("chance");
+        this.maxAnimalsPerBlock = this.getConfig().getInt("maxAnimalsPerBlock");
+        this.maxAnimalsCheckRadius = this.getConfig().getInt("maxAnimalsCheckRadius");
         this.autoUpdate = this.getConfig().getBoolean("auto-update");
 
         if (this.autoUpdate) {
@@ -88,32 +92,44 @@ public class WildSex extends JavaPlugin {
         this.listener = new WildSexTaskListener(this);
         getServer().getPluginManager().registerEvents(this.listener, this);
 
-        this.wildSexTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new WildSexTask(this, this.wildAnimalHandler, this.chance, this.mateMode), 0L, this.interval);
+        this.wildSexTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new WildSexTask(this), 0L, this.interval);
         this.startTime = System.currentTimeMillis();
-
-        getLogger().log(Level.INFO, "WildSex v{0} for CraftBukkit {1} by Funstein successfully activated!", new Object[]{this.getDescription().getVersion(), version});
-        String mateModeString = (this.mateMode) ? "active" : "inactive";
-        getLogger().log(Level.INFO, "Mate mode: {0}, interval: {1} minutes, chance: {2}.", new Object[]{mateModeString, this.interval / 1200, String.format("%.2f", this.chance)});
-
     }
 
     @Override
     public void onDisable() {
         this.getServer().getScheduler().cancelTask(this.wildSexTask);
         HandlerList.unregisterAll(this);
-        getLogger().log(Level.INFO, "WildSex v{0} by Funstein successfully deactivated!", this.getDescription().getVersion());
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            long numSeconds = (this.interval / 20) - (((System.currentTimeMillis() - this.startTime) % (this.interval * 50)) / 1000);
-            player.sendMessage(numSeconds + " seconds left until next wild sex.");
-            return true;
-        } else {
-            sender.sendMessage("You must be a player!");
-            return false;
-        }
+        long numSeconds = (this.interval / 20) - (((System.currentTimeMillis() - this.startTime) % (this.interval * 50)) / 1000);
+        sender.sendMessage(numSeconds + " seconds left until next wild sex.");
+        return true;
+    }
+
+    public WildAnimal getWildAnimalHandler() {
+        return wildAnimalHandler;
+    }
+
+    public int getInterval() {
+        return interval;
+    }
+
+    public boolean getMateMode() {
+        return mateMode;
+    }
+
+    public double getChance() {
+        return chance;
+    }
+
+    public double getMaxAnimalsPerBlock() {
+        return maxAnimalsPerBlock;
+    }
+
+    public double getMaxAnimalsCheckRadius() {
+        return maxAnimalsCheckRadius;
     }
 }

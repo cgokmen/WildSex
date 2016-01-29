@@ -11,25 +11,17 @@ import java.util.Random;
 import org.bukkit.World;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class WildSexTask extends BukkitRunnable {
 
     private static final int MATING_DISTANCE = 14;
-    private final JavaPlugin plugin;
+    private final WildSex plugin;
     private final Random randomizer;
-    private boolean mateMode;
-    private double chance;
-    private WildAnimal wildAnimalHandler;
 
-    public WildSexTask(JavaPlugin plugin, WildAnimal wildAnimalHandler, double chance, boolean mateMode) {
+    public WildSexTask(WildSex plugin) {
         this.plugin = plugin;
         this.randomizer = new Random();
-        this.chance = chance;
-        this.mateMode = mateMode;
-        this.wildAnimalHandler = wildAnimalHandler;
     }
 
     public void run() {
@@ -44,9 +36,10 @@ public class WildSexTask extends BukkitRunnable {
             while (animalIterator.hasNext()) {
                 Animals animal = (Animals) animalIterator.next();
 
-                if (animal.isAdult() && animal.canBreed() && !wildAnimalHandler.isInLoveMode(animal)) {
-                    if (Math.random() <= this.chance) {
-                        if (this.mateMode) {
+                if (animal.isAdult() && animal.canBreed() && !plugin.getWildAnimalHandler().isInLoveMode(animal)) {
+                    double outcome = randomizer.nextDouble();
+                    if (outcome <= plugin.getChance() && outcome <= getReproductionProbability(animal)) { // Not sure about this either
+                        if (plugin.getMateMode()) {
                             List<Entity> others = animal.getNearbyEntities(MATING_DISTANCE / 2, MATING_DISTANCE / 2, MATING_DISTANCE / 2);
                             List<Animals> eligibleMates = new ArrayList<Animals>();
 
@@ -57,7 +50,7 @@ public class WildSexTask extends BukkitRunnable {
                                 if (mate.getClass() == animal.getClass()) {
                                     Animals mateAnimal = (Animals) mate;
 
-                                    if (mateAnimal.isAdult() && mateAnimal.canBreed() && !wildAnimalHandler.isInLoveMode(mateAnimal)) {
+                                    if (mateAnimal.isAdult() && mateAnimal.canBreed() && !plugin.getWildAnimalHandler().isInLoveMode(mateAnimal)) {
                                         eligibleMates.add(mateAnimal);
                                     }
                                 }
@@ -65,15 +58,37 @@ public class WildSexTask extends BukkitRunnable {
 
                             if (!eligibleMates.isEmpty()) {
                                 Animals mateAnimal = eligibleMates.get(randomizer.nextInt(eligibleMates.size()));
-                                wildAnimalHandler.startLoveMode(animal);
-                                wildAnimalHandler.startLoveMode(mateAnimal);
+                                plugin.getWildAnimalHandler().startLoveMode(animal);
+                                plugin.getWildAnimalHandler().startLoveMode(mateAnimal);
                             }
                         } else {
-                            wildAnimalHandler.startLoveMode(animal);
+                            plugin.getWildAnimalHandler().startLoveMode(animal);
                         }
                     }
                 }
             }
         }
+    }
+
+    public double getReproductionProbability(Animals animal) {
+        double scale = plugin.getMaxAnimalsCheckRadius() / 2.0;
+        List<Entity> neighbors = animal.getNearbyEntities(scale, scale, scale);
+
+        Iterator<Entity> neighborIterator = neighbors.iterator();
+        int count = 0;
+
+        while (neighborIterator.hasNext()) {
+            Entity neighbor = neighborIterator.next();
+
+            if (neighbor instanceof Animals)
+                count++;
+        }
+
+        // I'm really not sure about this formula.
+        double targetPopulationForCheckRadius = plugin.getMaxAnimalsPerBlock() * Math.pow(plugin.getMaxAnimalsCheckRadius(), 3);
+        double currentPopulationRatio = count / targetPopulationForCheckRadius;
+        double probability = 1 - currentPopulationRatio;
+
+        return (probability > 0) ? probability : 0.0;
     }
 }

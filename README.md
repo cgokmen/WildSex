@@ -14,6 +14,8 @@ The config.yml file supports the following settings:
 * mateMode (false by default) pairs animals with a close pair and then sets both on love mode, guaranteeing reproduction in the case where there is an eligible pair close by.
 * interval (10 by default) the number between two WildSex runs, in minutes.
 * chance (0.1 by default) the possibility of a random animal being set on love mode. 0 disables the plugin and 1 sets every animal on love mode on every run.
+* maxAnimalsPerBlock (2 by default) how many animals should there be per one block? this is the maximum value where the population will plateau, effectively stopping reproduction
+* maxAnimalsCheckRadius (3 by default) for how many blocks around the individual animal should the above limitation hold? For example, if you specify 2 animals and a check radius of 3, the plugin will check to see that there aren't more than 54 ( = 2 * 3 * 3 * 3 ) animals in the 3x3x3 cuboid around the animal.
 * auto-update (true by default) updates the plugin automatically whenever a new version is released. All versions will maintain backwards compatibility, so keeping this on is a good idea.
 
 Supported Versions
@@ -21,7 +23,7 @@ Supported Versions
 All CraftBukkit & Spigot releases for:
 * 1.7.9
 * 1.7.10
-* 1.8(And Protocol Hack!)
+* 1.8 (And Protocol Hack!)
 * 1.8.3
 * 1.8.4
 * 1.8.7

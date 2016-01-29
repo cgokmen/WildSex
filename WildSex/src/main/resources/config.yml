@@ -1,7 +1,7 @@
 # matemode - should animals be put into love mode randomly
 # or should it be done with a mate (as a couple)?
-# default: false
-matemode: false
+# default: true
+matemode: true
 
 # interval - how many minutes between each iteration of the
 # random breeding? Do not put anything below 1.
@@ -12,6 +12,20 @@ interval: 10
 # 1 will mean every cow, 0 will mean none.
 # default: 0.1
 chance: 0.1
+
+# maxAnimalsPerBlock - how many animals should there be per one block?
+# this is the maximum value where the population will plateau,
+# effectively stopping reproduction
+# default: 2
+maxAnimalsPerBlock: 2
+
+# maxAnimalsCheckRadius - for how many blocks around the individual
+# animal should the above limitation hold? For example, if you specify
+# 2 animals and a check radius of 3, the plugin will check to see
+# that there aren't more than 54 ( = 2 * 3 * 3 * 3 ) animals in the 3x3x3
+# cuboid around the animal.
+# default: 3
+maxAnimalsCheckRadius: 3
 
 # auto-update - true will automatically update the plugin when a
 # new version comes out - recommended since backward compatibility
