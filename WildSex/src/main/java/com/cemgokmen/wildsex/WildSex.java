@@ -19,7 +19,7 @@ public class WildSex extends JavaPlugin {
     private int interval;
     private boolean mateMode;
     private double chance;
-    private double maxAnimalsPerBlock;
+    private int maxAnimalsPerBlock;
     private double maxAnimalsCheckRadius;
     private boolean autoUpdate;
     private WildSexTaskListener listener;
@@ -51,7 +51,7 @@ public class WildSex extends JavaPlugin {
         this.mateMode = this.getConfig().getBoolean("matemode");
         this.chance = this.getConfig().getDouble("chance");
         this.maxAnimalsPerBlock = this.getConfig().getInt("maxAnimalsPerBlock");
-        this.maxAnimalsCheckRadius = this.getConfig().getInt("maxAnimalsCheckRadius");
+        this.maxAnimalsCheckRadius = this.getConfig().getDouble("maxAnimalsCheckRadius");
         this.autoUpdate = this.getConfig().getBoolean("auto-update");
 
         if (this.autoUpdate) {

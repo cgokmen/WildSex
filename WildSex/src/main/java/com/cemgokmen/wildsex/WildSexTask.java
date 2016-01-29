@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
@@ -30,39 +32,45 @@ public class WildSexTask extends BukkitRunnable {
 
         while (worldIterator.hasNext()) {
             World world = worldIterator.next();
-            Collection<Animals> animals = world.getEntitiesByClass(Animals.class);
 
-            Iterator<Animals> animalIterator = animals.iterator();
-            while (animalIterator.hasNext()) {
-                Animals animal = (Animals) animalIterator.next();
+            Chunk[] chunks = world.getLoadedChunks();
 
-                if (animal.isAdult() && animal.canBreed() && !plugin.getWildAnimalHandler().isInLoveMode(animal)) {
-                    double outcome = randomizer.nextDouble();
-                    if (outcome <= plugin.getChance() && outcome <= getReproductionProbability(animal)) { // Not sure about this either
-                        if (plugin.getMateMode()) {
-                            List<Entity> others = animal.getNearbyEntities(MATING_DISTANCE / 2, MATING_DISTANCE / 2, MATING_DISTANCE / 2);
-                            List<Animals> eligibleMates = new ArrayList<Animals>();
+            for (Chunk chunk : chunks) {
+                Entity[] entities = chunk.getEntities(); //world.getEntitiesByClass(Animals.class);
 
-                            Iterator<Entity> othersIterator = others.iterator();
-                            while (othersIterator.hasNext()) {
-                                Entity mate = othersIterator.next();
+                for (Entity e: entities) {
+                    if (e instanceof Animals) {
+                        Animals animal = (Animals) e;
 
-                                if (mate.getClass() == animal.getClass()) {
-                                    Animals mateAnimal = (Animals) mate;
+                        if (animal.isAdult() && animal.canBreed() && !plugin.getWildAnimalHandler().isInLoveMode(animal)) {
+                            double outcome = randomizer.nextDouble();
+                            if (outcome <= plugin.getChance() && outcome <= getReproductionProbability(animal)) { // Not sure about this either
+                                if (plugin.getMateMode()) {
+                                    List<Entity> others = animal.getNearbyEntities(MATING_DISTANCE / 2, MATING_DISTANCE / 2, MATING_DISTANCE / 2);
+                                    List<Animals> eligibleMates = new ArrayList<Animals>();
 
-                                    if (mateAnimal.isAdult() && mateAnimal.canBreed() && !plugin.getWildAnimalHandler().isInLoveMode(mateAnimal)) {
-                                        eligibleMates.add(mateAnimal);
+                                    Iterator<Entity> othersIterator = others.iterator();
+                                    while (othersIterator.hasNext()) {
+                                        Entity mate = othersIterator.next();
+
+                                        if (mate.getClass() == animal.getClass()) {
+                                            Animals mateAnimal = (Animals) mate;
+
+                                            if (mateAnimal.isAdult() && mateAnimal.canBreed() && !plugin.getWildAnimalHandler().isInLoveMode(mateAnimal)) {
+                                                eligibleMates.add(mateAnimal);
+                                            }
+                                        }
                                     }
+
+                                    if (!eligibleMates.isEmpty()) {
+                                        Animals mateAnimal = eligibleMates.get(randomizer.nextInt(eligibleMates.size()));
+                                        plugin.getWildAnimalHandler().startLoveMode(animal);
+                                        plugin.getWildAnimalHandler().startLoveMode(mateAnimal);
+                                    }
+                                } else {
+                                    plugin.getWildAnimalHandler().startLoveMode(animal);
                                 }
                             }
-
-                            if (!eligibleMates.isEmpty()) {
-                                Animals mateAnimal = eligibleMates.get(randomizer.nextInt(eligibleMates.size()));
-                                plugin.getWildAnimalHandler().startLoveMode(animal);
-                                plugin.getWildAnimalHandler().startLoveMode(mateAnimal);
-                            }
-                        } else {
-                            plugin.getWildAnimalHandler().startLoveMode(animal);
                         }
                     }
                 }
@@ -84,8 +92,31 @@ public class WildSexTask extends BukkitRunnable {
                 count++;
         }
 
+        // If the count stays the same with a smaller area, then we should ideally be doing this with that smaller area.
+        double radius = plugin.getMaxAnimalsCheckRadius() / 2.0;
+        while (true) {
+            double r = radius - 0.5;
+            List<Entity> ns = animal.getNearbyEntities(r, r, r);
+
+            Iterator<Entity> nI = ns.iterator();
+            int c = 0;
+
+            while (nI.hasNext()) {
+                Entity n = nI.next();
+
+                if (n instanceof Animals)
+                    c++;
+            }
+
+            if (c == count) {
+                radius = r;
+            } else {
+                break;
+            }
+        }
+
         // I'm really not sure about this formula.
-        double targetPopulationForCheckRadius = plugin.getMaxAnimalsPerBlock() * Math.pow(plugin.getMaxAnimalsCheckRadius(), 2); // Check for the square area, but apply it to the cube.
+        double targetPopulationForCheckRadius = plugin.getMaxAnimalsPerBlock() * Math.pow(radius * 2, 2); // Check for the square area, but apply it to the cube.
         double currentPopulationRatio = count / targetPopulationForCheckRadius;
         double probability = 1 - currentPopulationRatio;
 
