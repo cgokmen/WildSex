@@ -10,8 +10,8 @@ interval: 10
 
 # chance - 1 in how many cows should be set into breeding mode?
 # 1 will mean every cow, 0 will mean none.
-# default: 0.1
-chance: 0.1
+# default: 0.5
+chance: 0.5
 
 # maxAnimalsPerBlock - how many animals should there be per one block?
 # this is the maximum value where the population will plateau,
