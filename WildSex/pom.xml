@@ -5,7 +5,7 @@
     <artifactId>wildsex</artifactId>
     <packaging>jar</packaging>
     <name>WildSex</name>
-    <version>3.0</version>
+    <version>3.01b</version>
     <!-- This is where I track the version -->
 
     <repositories>

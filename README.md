@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/sultanskyman/WildSex/master/wildsex.png" alt="Project Logo" title="WildSex - Even your sheep need some fun!"/>
 </p>
 
-WildSex 3.0 Beta
+WildSex 3
 =======
 A Bukkit plugin that randomly puts wild animals in love mode, creating natural population increase.
 
@@ -34,7 +34,7 @@ All CraftBukkit & Spigot releases for:
 * 1.8.7
 * 1.8.8
 
-Known Bugs
+Known Bgs
 ----------
 * ~~The XP removal system does not function as expected - XP still drops from breeding animals.~~
 
