@@ -1,11 +1,12 @@
 package com.cemgokmen.wildsex;
 
-import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.cemgokmen.wildsex.api.WildAnimal;
@@ -19,10 +20,13 @@ public class WildSex extends JavaPlugin {
     private int interval;
     private boolean mateMode;
     private double chance;
-    private int maxAnimalsPerBlock;
+    private double maxAnimalsPerBlock;
     private double maxAnimalsCheckRadius;
     private boolean autoUpdate;
+    private boolean removeXP;
+    private int maxMateDistance;
     private WildSexTaskListener listener;
+    private Set<Entity> lastMateAnimals;
 
     @Override
     public void onEnable() {
@@ -48,11 +52,14 @@ public class WildSex extends JavaPlugin {
         this.reloadConfig();
 
         this.interval = this.getConfig().getInt("interval") * 20 * 60;
-        this.mateMode = this.getConfig().getBoolean("matemode");
+        this.mateMode = this.getConfig().getBoolean("mateMode");
         this.chance = this.getConfig().getDouble("chance");
-        this.maxAnimalsPerBlock = this.getConfig().getInt("maxAnimalsPerBlock");
+        this.maxAnimalsPerBlock = this.getConfig().getDouble("maxAnimalsPerBlock");
         this.maxAnimalsCheckRadius = this.getConfig().getDouble("maxAnimalsCheckRadius");
-        this.autoUpdate = this.getConfig().getBoolean("auto-update");
+        this.autoUpdate = this.getConfig().getBoolean("autoUpdate");
+        this.removeXP = this.getConfig().getBoolean("removeXP");
+        this.maxMateDistance = this.getConfig().getInt("maxMateDistance");
+        this.lastMateAnimals = new HashSet<Entity>();
 
         if (this.autoUpdate) {
             Updater updater = new Updater(this, 85038, this.getFile(), Updater.UpdateType.DEFAULT, true);
@@ -89,8 +96,17 @@ public class WildSex extends JavaPlugin {
             }
         }
 
-        this.listener = new WildSexTaskListener(this);
-        getServer().getPluginManager().registerEvents(this.listener, this);
+        if (this.removeXP) {
+            try {
+                final Class<?> clazz = Class.forName("com.bergerkiller.bukkit.common.events.EntityAddEvent");
+                // Check if we have a WildAnimalHandler class at that location.
+                this.listener = new WildSexTaskListener(this);
+                getServer().getPluginManager().registerEvents(this.listener, this);
+            } catch (final Exception e) {
+                this.getLogger().warning("The experience orb removal module depends on BKCommonLib. Due to the absence of this library, it has been disabled.");
+                this.getLogger().warning("You can get BKCommonLib at https://drone.io/github.com/bergerhealer/BKCommonLib/files");
+            }
+        }
 
         this.wildSexTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new WildSexTask(this), 0L, this.interval);
         this.startTime = System.currentTimeMillis();
@@ -109,12 +125,20 @@ public class WildSex extends JavaPlugin {
         return true;
     }
 
-    public WildAnimal getWildAnimalHandler() {
-        return wildAnimalHandler;
+    public void clearMatedAnimals() {
+        this.lastMateAnimals.clear();
     }
 
-    public int getInterval() {
-        return interval;
+    public void addMatedAnimal(Entity e) {
+        this.lastMateAnimals.add(e);
+    }
+
+    public Entity[] getMatedAnimals() {
+        return this.lastMateAnimals.toArray(new Entity[0]);
+    }
+
+    public WildAnimal getWildAnimalHandler() {
+        return wildAnimalHandler;
     }
 
     public boolean getMateMode() {
@@ -131,5 +155,9 @@ public class WildSex extends JavaPlugin {
 
     public double getMaxAnimalsCheckRadius() {
         return maxAnimalsCheckRadius;
+    }
+
+    public int getMaxMateDistance() {
+        return maxMateDistance;
     }
 }

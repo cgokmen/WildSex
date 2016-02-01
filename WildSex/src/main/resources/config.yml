@@ -1,7 +1,12 @@
-# matemode - should animals be put into love mode randomly
+# mateMode - should animals be put into love mode randomly
 # or should it be done with a mate (as a couple)?
 # default: true
-matemode: true
+mateMode: true
+
+# maxMateDistance - the maximum distance two animals can be apart
+# in order for the plugin to pair them
+# default: 4
+maxMateDistance: 4
 
 # interval - how many minutes between each iteration of the
 # random breeding? Do not put anything below 1.
@@ -10,25 +15,30 @@ interval: 10
 
 # chance - 1 in how many cows should be set into breeding mode?
 # 1 will mean every cow, 0 will mean none.
-# default: 0.5
-chance: 0.5
+# default: 0.1
+chance: 0.1
 
 # maxAnimalsPerBlock - how many animals should there be per one block?
 # this is the maximum value where the population will plateau,
 # effectively stopping reproduction
-# default: 1
-maxAnimalsPerBlock: 1
+# default: 2
+maxAnimalsPerBlock: 2
 
 # maxAnimalsCheckRadius - for how many blocks around the individual
 # animal should the above limitation hold? For example, if you specify
 # 2 animals and a check radius of 3, the plugin will check to see
-# that there aren't more than 54 ( = 2 * 3 * 3 * 3 ) animals in the 3x3x3
-# cuboid around the animal.
-# default: 6
-maxAnimalsCheckRadius: 6
+# that there aren't more than 18 ( = 2 * 3 * 3 ) animals in the 3x3
+# area around the animal.
+# default: 3
+maxAnimalsCheckRadius: 3
 
 # auto-update - true will automatically update the plugin when a
 # new version comes out - recommended since backward compatibility
 # will always be maintained.
 # default: true
-auto-update: true
+autoUpdate: true
+
+# removeXP - true will automatically remove any experience orbs
+# that appear after WildSex causes childbirth.
+# default: true
+removeXP: true

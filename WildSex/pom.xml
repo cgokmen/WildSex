@@ -5,7 +5,7 @@
     <artifactId>wildsex</artifactId>
     <packaging>jar</packaging>
     <name>WildSex</name>
-    <version>2.3</version>
+    <version>3.0</version>
     <!-- This is where I track the version -->
 
     <repositories>
@@ -68,6 +68,14 @@
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <version>1.7.9-R0.2</version>
+            <type>jar</type>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.bergerkiller.bukkit</groupId>
+            <artifactId>BKCommonLib</artifactId>
+            <version>1.67-SNAPSHOT</version>
             <type>jar</type>
             <scope>provided</scope>
             <optional>true</optional>
