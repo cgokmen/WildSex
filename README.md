@@ -40,7 +40,7 @@ Known Bgs
 
 To do
 ----------
-* ~~Fix XP drop removal~
+* ~~Fix XP drop removal~~
 
 Special thanks to
 ----------
