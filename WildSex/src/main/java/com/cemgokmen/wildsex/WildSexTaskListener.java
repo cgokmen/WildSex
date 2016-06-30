@@ -35,12 +35,14 @@ public class WildSexTaskListener implements Listener {
             double dist = 0.0;
             for (Entity e : plugin.getMatedAnimals()) {
                 Location l = e.getLocation();
-                double distance = l.distance(orbLocation);
-                if (distance < MAX_DISTANCE) {
-                    isFromMatedAnimal = true;
-                    dist = distance;
-                    break;
-                }
+                if(l.getWorld().equals(orbLocation.getWorld())){
+                	double distance = l.distance(orbLocation);
+                    if (distance < MAX_DISTANCE) {
+                        isFromMatedAnimal = true;
+                        dist = distance;
+                        break;
+                    }
+                }               
             }
             if (isFromMatedAnimal) {
                 orb.remove();

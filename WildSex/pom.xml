@@ -5,7 +5,7 @@
     <artifactId>wildsex</artifactId>
     <packaging>jar</packaging>
     <name>WildSex</name>
-    <version>3.3</version>
+    <version>3.6</version>
     <!-- This is where I track the version -->
 
     <repositories>
@@ -13,6 +13,10 @@
               <id>Another-Spigot-repo</id>
               <url>http://maven.elmakers.com/repository/</url>
           </repository>
+          <repository>
+            <id>repo</id>
+            <url>http://73.64.253.11/repo/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -60,6 +64,22 @@
             <groupId>com.cemgokmen</groupId>
             <artifactId>wildsex-v1_9_R1</artifactId>
             <version>v1_9_R1</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.cemgokmen</groupId>
+            <artifactId>wildsex-v1_9_R2</artifactId>
+            <version>v1_9_R2</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.cemgokmen</groupId>
+            <artifactId>wildsex-v1_10_R1</artifactId>
+            <version>v1_10_R1</version>
             <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
