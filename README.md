@@ -35,10 +35,8 @@ All CraftBukkit & Spigot releases for:
 * 1.8.4
 * 1.8.7
 * 1.8.8
-
-Known Bgs
-----------
-* ~~The XP removal system does not function as expected - XP still drops from breeding animals.~~
+* 1.9
+* 1.9.2
 
 To do
 ----------
