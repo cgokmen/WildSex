@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/sultanskyman/WildSex/master/wildsex.png" alt="Project Logo" title="WildSex - Even your sheep need some fun!"/>
 </p>
 
-WildSex 3.3 ![Build status](https://travis-ci.org/sultanskyman/WildSex.svg)
+WildSex 4 ![Build status](https://travis-ci.org/sultanskyman/WildSex.svg)
 =======
 A Bukkit plugin that randomly puts wild animals in love mode, creating natural population increase.
 
@@ -31,7 +31,7 @@ All CraftBukkit & Spigot releases for:
 * 1.10.2
 * 1.11
 
-(Older versions have been dropped with WildSex 3.3. You can try earlier versions for support.)
+(Older versions have been dropped with WildSex 4. You can try earlier versions for support.)
 
 Known Bugs
 ----------
