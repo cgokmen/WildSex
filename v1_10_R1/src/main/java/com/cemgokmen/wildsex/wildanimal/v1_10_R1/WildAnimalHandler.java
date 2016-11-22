@@ -28,7 +28,7 @@ public class WildAnimalHandler implements WildAnimal {
         EntityHuman human = null;
 
         try {
-            Class<?> c = entity.getClass();
+            Class<?> c = EntityAnimal.class;
 
             Field bx = c.getDeclaredField("bx");
             bx.setAccessible(true);
