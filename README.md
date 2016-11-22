@@ -31,11 +31,12 @@ All CraftBukkit & Spigot releases for:
 
 Known Bugs
 ----------
-None right now
+* The XP removal successfully sets the XP drop to zero, but Minecraft still spawns XP orbs (which, when picked, give 0 XP)
 
 To do
 ----------
 * Improve density checking
+* Contact Spigot people on XP removal issue
 
 Special thanks to
 ----------
