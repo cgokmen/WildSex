@@ -1,7 +1,6 @@
 language: java
 sudo: false
 install:
-  - git clone https://github.com/bergerhealer/BKCommonLib.git && cd BKCommonLib && wget https://drone.io/github.com/bergerhealer/BKCommonLib/files/target/BKCommonLib.jar && mvn install:install-file -Dfile=BKCommonLib.jar -DpomFile=pom.xml && cd ..
   - mvn install
 deploy:
   provider: releases
