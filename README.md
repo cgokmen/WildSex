@@ -8,10 +8,6 @@ A Bukkit plugin that randomly puts wild animals in love mode, creating natural p
 
 [Download Now](https://github.com/sultanskyman/WildSex/releases)
 
-Dependencies
--------------
-The plugin depends on [BKCommonLib](https://www.spigotmc.org/resources/updated-bkcommonlib.7716/) for the detection of XP creation. If you wish to use the removeXP option, please install that plugin.
-
 Configuration
 -------------
 The config.yml file supports the following settings:
