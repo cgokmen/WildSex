@@ -26,7 +26,7 @@ public class WildSex extends JavaPlugin {
     private boolean removeXP;
     private int maxMateDistance;
     private WildSexTaskListener listener;
-    private Set<Entity> lastMateAnimals;
+    protected Set<Entity> lastMateAnimals;
 
     @Override
     public void onEnable() {
@@ -97,15 +97,8 @@ public class WildSex extends JavaPlugin {
         }
 
         if (this.removeXP) {
-            try {
-                final Class<?> clazz = Class.forName("com.bergerkiller.bukkit.common.events.EntityAddEvent");
-                // Check if we have a WildAnimalHandler class at that location.
-                this.listener = new WildSexTaskListener(this);
-                getServer().getPluginManager().registerEvents(this.listener, this);
-            } catch (final Exception e) {
-                this.getLogger().warning("The experience orb removal module depends on BKCommonLib. Due to the absence of this library, it has been disabled.");
-                this.getLogger().warning("You can get BKCommonLib at https://drone.io/github.com/bergerhealer/BKCommonLib/files");
-            }
+            this.listener = new WildSexTaskListener(this);
+            getServer().getPluginManager().registerEvents(this.listener, this);
         }
 
         this.wildSexTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new WildSexTask(this), 0L, this.interval);
@@ -131,10 +124,6 @@ public class WildSex extends JavaPlugin {
 
     public void addMatedAnimal(Entity e) {
         this.lastMateAnimals.add(e);
-    }
-
-    public Entity[] getMatedAnimals() {
-        return this.lastMateAnimals.toArray(new Entity[0]);
     }
 
     public WildAnimal getWildAnimalHandler() {

@@ -1,38 +1,40 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.cemgokmen</groupId>
-  <artifactId>wildsex-parent</artifactId>
-  <!-- Artifact ID doesn't matter for anything but the final product
-       At least, it doesn't matter externally to this setup -->
-  <packaging>pom</packaging>
-  <!-- Packaging? POM -->
-  <version>parent</version>
-  <!-- I keep my versions of the internal projects static, so I don't have to rename them all the time. -->
-  <name>WildSex Parent</name>
-  <url>http://github.com/Sultanskyman/WildSex</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-       <maven.compiler.source>1.6</maven.compiler.source>
-       <maven.compiler.target>1.6</maven.compiler.target>
-  </properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.cemgokmen</groupId>
+    <artifactId>wildsex-parent</artifactId>
+    <!-- Artifact ID doesn't matter for anything but the final product
+         At least, it doesn't matter externally to this setup -->
+    <packaging>pom</packaging>
+    <!-- Packaging? POM -->
+    <version>parent</version>
+    <!-- I keep my versions of the internal projects static, so I don't have to rename them all the time. -->
+    <name>WildSex Parent</name>
+    <url>http://github.com/Sultanskyman/WildSex</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
-  <modules>
-    <module>API</module>
-    <module>v1_7_R3</module>
-    <module>v1_7_R4</module>
-    <module>v1_8_R1</module>
-    <module>v1_8_R2</module>
-    <module>v1_8_R3</module>
-    <module>WildSex</module>
-  </modules>
+    <modules>
+        <module>API</module>
+        <module>v1_10_R1</module>
+        <module>v1_11_R1</module>
+        <module>WildSex</module>
+    </modules>
 
-  <!-- Define the repo here since multiple modules will be using it -->
-  <repositories>
+    <!-- Define the repo here since multiple modules will be using it -->
+    <repositories>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
         <repository>
             <id>Another-Spigot-repo</id>
             <url>http://maven.elmakers.com/repository/</url>
         </repository>
-  </repositories>
+    </repositories>
 
 </project>

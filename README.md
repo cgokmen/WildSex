@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/sultanskyman/WildSex/master/wildsex.png" alt="Project Logo" title="WildSex - Even your sheep need some fun!"/>
 </p>
 
-WildSex 3 ![Build status](https://travis-ci.org/sultanskyman/WildSex.svg)
+WildSex 3.3 ![Build status](https://travis-ci.org/sultanskyman/WildSex.svg)
 =======
 A Bukkit plugin that randomly puts wild animals in love mode, creating natural population increase.
 
@@ -28,26 +28,22 @@ The config.yml file supports the following settings:
 Supported Versions
 -------------------
 All CraftBukkit & Spigot releases for:
-* 1.7.9
-* 1.7.10
-* 1.8 (And Protocol Hack!)
-* 1.8.3
-* 1.8.4
-* 1.8.7
-* 1.8.8
+* 1.10.2
+* 1.11
 
-Known Bgs
+(Older versions have been dropped with WildSex 3.3. You can try earlier versions for support.)
+
+Known Bugs
 ----------
-* ~~The XP removal system does not function as expected - XP still drops from breeding animals.~~
+None right now
 
 To do
 ----------
-* ~~Fix XP drop removal~~
+* Improve density checking
 
 Special thanks to
 ----------
 * [Gravity](https://github.com/gravitylow), for [Updater](https://github.com/gravitylow/Updater),
-* [mbaxter](https://github.com/mbax), for his [Multiple Versions Tutorial](https://forums.bukkit.org/threads/support-multiple-minecraft-versions-with-abstraction-maven.115810/) and [AbstractionExamplePlugin](https://github.com/mbax/AbstractionExamplePlugin) - these solved the problem I was trying to figure out at [Stack Overflow](http://stackoverflow.com/questions/25947376/dynamic-typecasting-in-java),
 * [DrkMatr1984](https://github.com/DrkMatr1984), for helping maintain this project as a contributor.
 
 Source

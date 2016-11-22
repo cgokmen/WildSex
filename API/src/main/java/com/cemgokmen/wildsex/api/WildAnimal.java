@@ -6,6 +6,4 @@ public interface WildAnimal {
     public boolean isInLoveMode(Animals animal);
 
     public void startLoveMode(Animals animal);
-
-    public void endLoveMode(Animals animal);
 }
