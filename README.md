@@ -36,7 +36,9 @@ Known Bugs
 To do
 ----------
 * Improve density checking
-* Contact Spigot people on XP removal issue
+* Use a timer to remove Oxp orbs.
+* Add feature to block non-wildsex animal breeding.
+* Add a feature to allow animals to breed depending on their hunger status (eating grass).
 
 Special thanks to
 ----------
