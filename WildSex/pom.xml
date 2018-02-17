@@ -5,7 +5,7 @@
     <artifactId>wildsex</artifactId>
     <packaging>jar</packaging>
     <name>WildSex</name>
-    <version>4.0</version>
+    <version>4.0.1</version>
     <!-- This is where I track the version -->
 
     <repositories>
@@ -28,6 +28,14 @@
             <groupId>com.cemgokmen</groupId>
             <artifactId>wildsex-v1_11_R1</artifactId>
             <version>v1_11_R1</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.cemgokmen</groupId>
+            <artifactId>wildsex-v1_12_R1</artifactId>
+            <version>v1_12_R1</version>
             <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
