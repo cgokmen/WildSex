@@ -1,14 +1,13 @@
 package com.cemgokmen.wildsex;
 
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityBreedEvent;
 
-import java.util.Set;
-
 public class WildSexTaskListener implements Listener {
+
     private WildSex plugin;
 
     public WildSexTaskListener(WildSex plugin) {
@@ -17,11 +16,12 @@ public class WildSexTaskListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityBreedEvent(EntityBreedEvent e) {
-        Set<Entity> matedAnimals = plugin.lastMateAnimals;
-        if (matedAnimals.contains(e.getFather()) || matedAnimals.contains(e.getMother())) {
+        LivingEntity father = e.getFather(), mother = e.getMother();
+        if (plugin.isMatedAnimal(father) || plugin.isMatedAnimal(mother)) {
             e.setExperience(0);
-            matedAnimals.remove(e.getFather());
-            matedAnimals.remove(e.getMother());
+            this.plugin.removeMatedAnimal(father);
+            this.plugin.removeMatedAnimal(mother);
         }
     }
+
 }
