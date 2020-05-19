@@ -7,20 +7,18 @@
     <name>WildSex</name>
     <version>4.0.1</version>
     <!-- This is where I track the version -->
-
-    <repositories>
-          <repository>
-              <id>Another-Spigot-repo</id>
-              <url>http://maven.elmakers.com/repository/</url>
-          </repository>
-    </repositories>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.cemgokmen</groupId>
             <artifactId>wildsex-v1_10_R1</artifactId>
             <version>v1_10_R1</version>
-            <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
@@ -28,7 +26,6 @@
             <groupId>com.cemgokmen</groupId>
             <artifactId>wildsex-v1_11_R1</artifactId>
             <version>v1_11_R1</version>
-            <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
@@ -36,7 +33,6 @@
             <groupId>com.cemgokmen</groupId>
             <artifactId>wildsex-v1_12_R1</artifactId>
             <version>v1_12_R1</version>
-            <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
@@ -44,22 +40,18 @@
             <groupId>com.cemgokmen</groupId>
             <artifactId>wildsex-api</artifactId>
             <version>API</version>
-            <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.10.2-R0.1-SNAPSHOT</version>
-            <type>jar</type>
+            <version>1.13.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
-            <optional>true</optional>
         </dependency>
     </dependencies>
 
     <build>
-        <directory>../target</directory>
         <finalName>WildSex</finalName>
         <!-- Define filtering for the inclusion of plugin.yml, so we can utilize the pom.xml version in it -->
         <resources>
@@ -67,17 +59,13 @@
                 <targetPath>.</targetPath>
                 <filtering>true</filtering>
                 <directory>src/main/resources</directory>
-                <includes>
-                    <include>plugin.yml</include>
-                    <include>config.yml</include>
-                </includes>
             </resource>
         </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>2.4.3</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>

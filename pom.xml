@@ -12,11 +12,19 @@
     <!-- I keep my versions of the internal projects static, so I don't have to rename them all the time. -->
     <name>WildSex Parent</name>
     <url>http://github.com/Sultanskyman/WildSex</url>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+
+    <repositories>
+      <repository>
+        <id>spigot-repo</id>
+        <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+      </repository>
+    </repositories>
 
     <modules>
         <module>API</module>
@@ -25,17 +33,5 @@
         <module>v1_12_R1</module>
         <module>WildSex</module>
     </modules>
-
-    <!-- Define the repo here since multiple modules will be using it -->
-    <repositories>
-        <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>Another-Spigot-repo</id>
-            <url>http://maven.elmakers.com/repository/</url>
-        </repository>
-    </repositories>
 
 </project>

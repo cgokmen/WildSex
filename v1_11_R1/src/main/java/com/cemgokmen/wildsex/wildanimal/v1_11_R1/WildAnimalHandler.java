@@ -32,7 +32,7 @@ public class WildAnimalHandler implements WildAnimal {
 
             Field bx = c.getDeclaredField("bw");
             bx.setAccessible(true);
-            bx.setInt(entity, 600);
+            bx.setInt(entity, WildAnimal.LOVEMODE_TICK_DURATION);
 
             Field by = c.getDeclaredField("bx");
             by.setAccessible(true);

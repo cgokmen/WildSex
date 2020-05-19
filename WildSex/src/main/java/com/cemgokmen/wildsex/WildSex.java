@@ -2,68 +2,74 @@ package com.cemgokmen.wildsex;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Level;
 
+import com.cemgokmen.wildsex.api.WildAnimal;
+import com.google.common.collect.Sets;
+
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
-import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
-import com.cemgokmen.wildsex.api.WildAnimal;
+import org.bukkit.scheduler.BukkitTask;
 
 public class WildSex extends JavaPlugin {
 
-    private WildAnimal wildAnimalHandler;
+	private static final Set<String> VERSIONS_USING_NMS = Sets.newHashSet("v1_10_R1", "v1_11_R1", "v1_12_R1");
 
-    private int wildSexTask;
+    private final Set<UUID> lastMateAnimals = new HashSet<>();
+
+    private WildAnimal wildAnimalHandler;
+    private BukkitTask wildSexTask;
+
     private long startTime;
     private int interval;
     private boolean mateMode;
     private double chance;
     private double maxAnimalsPerBlock;
     private double maxAnimalsCheckRadius;
-    private boolean autoUpdate;
-    private boolean removeXP;
     private int maxMateDistance;
-    private WildSexTaskListener listener;
-    protected Set<Entity> lastMateAnimals;
 
     @Override
     public void onEnable() {
         String packageName = this.getServer().getClass().getPackage().getName();
         String version = packageName.substring(packageName.lastIndexOf('.') + 1);
 
-        try {
-            final Class<?> clazz = Class.forName("com.cemgokmen.wildsex.wildanimal." + version + ".WildAnimalHandler");
-            // Check if we have a WildAnimalHandler class at that location.
-            if (WildAnimal.class.isAssignableFrom(clazz)) { // Make sure it actually implements WildAnimal
-                this.wildAnimalHandler = (WildAnimal) clazz.getConstructor().newInstance(); // Set our handler
+        if (VERSIONS_USING_NMS.contains(version)) {
+            try {
+                final Class<?> clazz = Class.forName("com.cemgokmen.wildsex.wildanimal." + version + ".WildAnimalHandler");
+                // Check if we have a WildAnimalHandler class at that location.
+                if (WildAnimal.class.isAssignableFrom(clazz)) { // Make sure it actually implements WildAnimal
+                    this.wildAnimalHandler = (WildAnimal) clazz.getConstructor().newInstance(); // Set our handler
+                }
+            } catch (ReflectiveOperationException e) {
+                e.printStackTrace();
+                this.getLogger().severe("This CraftBukkit version is not supported.");
+                this.getLogger().info("Check for updates at http://dev.bukkit.org/bukkit-plugins/wildsex/");
+                Bukkit.getPluginManager().disablePlugin(this);
+                return;
             }
-        } catch (final Exception e) {
-            e.printStackTrace();
-            this.getLogger().severe("This CraftBukkit version is not supported.");
-            this.getLogger().info("Check for updates at http://dev.bukkit.org/bukkit-plugins/wildsex/");
-            this.setEnabled(false);
-            return;
+        } else {
+        	this.wildAnimalHandler = new WildAnimalHandlerSafe();
         }
 
         // Start the actual loading part here.
         this.saveDefaultConfig();
-        this.reloadConfig();
 
-        this.interval = this.getConfig().getInt("interval") * 20 * 60;
-        this.mateMode = this.getConfig().getBoolean("mateMode");
-        this.chance = this.getConfig().getDouble("chance");
-        this.maxAnimalsPerBlock = this.getConfig().getDouble("maxAnimalsPerBlock");
-        this.maxAnimalsCheckRadius = this.getConfig().getDouble("maxAnimalsCheckRadius");
-        this.autoUpdate = this.getConfig().getBoolean("autoUpdate");
-        this.removeXP = this.getConfig().getBoolean("removeXP");
-        this.maxMateDistance = this.getConfig().getInt("maxMateDistance");
-        this.lastMateAnimals = new HashSet<Entity>();
+        FileConfiguration config = getConfig();
+        this.interval = config.getInt("interval") * 20 * 60;
+        this.mateMode = config.getBoolean("mateMode");
+        this.chance = config.getDouble("chance");
+        this.maxAnimalsPerBlock = config.getDouble("maxAnimalsPerBlock");
+        this.maxAnimalsCheckRadius = config.getDouble("maxAnimalsCheckRadius");
+        this.maxMateDistance = config.getInt("maxMateDistance");
 
-        if (this.autoUpdate) {
+        if (config.getBoolean("autoUpdate")) {
             Updater updater = new Updater(this, 85038, this.getFile(), Updater.UpdateType.DEFAULT, true);
-            getLogger().log(Level.INFO, "Running automatic updater.");
+            getLogger().info("Running automatic updater.");
             Updater.UpdateResult result = updater.getResult();
             switch(result)
             {
@@ -96,19 +102,23 @@ public class WildSex extends JavaPlugin {
             }
         }
 
-        if (this.removeXP) {
-            this.listener = new WildSexTaskListener(this);
-            getServer().getPluginManager().registerEvents(this.listener, this);
+        if (config.getBoolean("removeXP")) {
+            Bukkit.getPluginManager().registerEvents(new WildSexTaskListener(this), this);
         }
 
-        this.wildSexTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new WildSexTask(this), 0L, this.interval);
+        this.wildSexTask = new WildSexTask(this).runTaskTimer(this, 0L, interval);
         this.startTime = System.currentTimeMillis();
     }
 
     @Override
     public void onDisable() {
-        this.getServer().getScheduler().cancelTask(this.wildSexTask);
-        HandlerList.unregisterAll(this);
+        if (wildSexTask != null) {
+            this.wildSexTask.cancel();
+        }
+
+        if (lastMateAnimals != null) {
+            this.clearMatedAnimals();
+        }
     }
 
     @Override
@@ -123,7 +133,17 @@ public class WildSex extends JavaPlugin {
     }
 
     public void addMatedAnimal(Entity e) {
-        this.lastMateAnimals.add(e);
+        if (e == null) return;
+        this.lastMateAnimals.add(e.getUniqueId());
+    }
+
+    public void removeMatedAnimal(Entity e) {
+        if (e == null) return;
+        this.lastMateAnimals.remove(e.getUniqueId());
+    }
+
+    public boolean isMatedAnimal(Entity e) {
+        return e != null && lastMateAnimals.contains(e.getUniqueId());
     }
 
     public WildAnimal getWildAnimalHandler() {
